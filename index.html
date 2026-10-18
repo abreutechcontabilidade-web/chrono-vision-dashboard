@@ -2,7 +2,7 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>Chrono-Vision Dashboard (v12.3)</title>
+    <title>Chrono-Vision | VIGIA</title>
     <style>
         body { background-color: #1e1e2a; color: #fff; font-family: Arial, sans-serif; padding: 20px; margin: 0; display: flex; flex-direction: column; height: 100vh; box-sizing: border-box; }
         h1 { color: #8f8; text-align: center; margin-top: 0; }
@@ -27,15 +27,15 @@
 </head>
 <body>
     <h1>Chrono-Vision Dashboard</h1>
-    <div id="status">A ligar à Nuvem (Round E)...</div>
+    <div id="status">A ligar ao VIGIA...</div>
     <div class="container" id="metrics"></div>
     <div class="main-area">
         <div id="chat-container">
             <div id="chat-box">
-                <div class="message msg-luma">Sistema v12.3 (Round E) ativo. O CISO agora tem anti-iframe, anti-RCE e a metrologia PF-15.</div>
+                <div class="message msg-luma">Sistema v14.1 (VIGIA) ativo. Diga "Ativar Vigia" para monitorizar o sistema.</div>
             </div>
             <div id="chat-input-area">
-                <input type="text" id="chat-input" placeholder="Teste os ataques da Bancada..." autocomplete="off">
+                <input type="text" id="chat-input" placeholder="Ex: Ativar Vigia..." autocomplete="off">
                 <button id="send-btn">Enviar</button>
             </div>
         </div>
@@ -100,7 +100,7 @@
                             actDiv.style.borderLeftColor = '#f88';
                             actDiv.innerText = `[CISO BLOQUEOU] ${data.resultado}`;
                             document.getElementById('preview-text').style.display = 'block';
-                            document.getElementById('preview-text').innerText = "Preview Bloqueado (Round E)";
+                            document.getElementById('preview-text').innerText = "Preview Bloqueado";
                             document.getElementById('preview-text').style.color = "#f88";
                             document.getElementById('ui-preview').innerHTML = "";
                         }
