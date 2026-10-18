@@ -43,7 +43,7 @@
             </div>
         </div>
         <div id="preview-container">
-            <h2 id="preview-text">Aguardando CÃ³digo...</h2>
+            <h2 id="preview-text">Aguardando Código...</h2>
             <div id="ui-preview"></div>
         </div>
     </div>
@@ -72,10 +72,10 @@
         fetchMetrics();
         setInterval(fetchMetrics, 5000);
 
-        let pollingInterval = null;
+        let pollingInterval = null; let pollCount = 0;
         let loadingDiv = null;
 
-        async function checkStatus() {
+        async function checkStatus() { pollCount++; if (pollCount > 20) { clearInterval(pollingInterval); if (loadingDiv) { loadingDiv.innerText = "[ERRO] O servidor demorou demasiado tempo (Timeout)."; loadingDiv.style.borderLeftColor = "#f88"; } return; }
             try {
                 const response = await fetch(`${API_URL}/api/status`);
                 const data = await response.json();
