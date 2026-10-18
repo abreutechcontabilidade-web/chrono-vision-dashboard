@@ -2,6 +2,9 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1e1e2a">
+    <link rel="manifest" href="manifest.json">
     <title>Chrono-Vision | VIGIA</title>
     <style>
         body { background-color: #1e1e2a; color: #fff; font-family: Arial, sans-serif; padding: 20px; margin: 0; display: flex; flex-direction: column; height: 100vh; box-sizing: border-box; }
@@ -40,7 +43,7 @@
             </div>
         </div>
         <div id="preview-container">
-            <h2 id="preview-text">Aguardando Código...</h2>
+            <h2 id="preview-text">Aguardando CÃ³digo...</h2>
             <div id="ui-preview"></div>
         </div>
     </div>
@@ -55,7 +58,7 @@
                 document.getElementById('status').innerText = `Status: ${data.status}`;
                 document.getElementById('metrics').innerHTML = `
                     <div class="card">
-                        <h3>Latência do Córtex</h3>
+                        <h3>LatÃªncia do CÃ³rtex</h3>
                         <p>${data.cortex_latency_ms} ms</p>
                         <small>${data.latency_mode}</small>
                     </div>
@@ -91,7 +94,7 @@
                         const actDiv = document.createElement('div');
                         actDiv.className = 'message msg-luma';
                         if (data.sucesso) {
-                            actDiv.innerText = `[LUMA] Ação concluída. Sucesso: True`;
+                            actDiv.innerText = `[LUMA] AÃ§Ã£o concluÃ­da. Sucesso: True`;
                             if (data.preview_html) {
                                 document.getElementById('preview-text').style.display = 'none';
                                 document.getElementById('ui-preview').innerHTML = data.preview_html;
@@ -145,6 +148,15 @@
 
         document.getElementById('send-btn').addEventListener('click', sendCommand);
         document.getElementById('chat-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') sendCommand(); });
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('SW registado:', reg.scope))
+                    .catch(err => console.log('Erro SW:', err));
+            });
+        }
     </script>
 </body>
 </html>
