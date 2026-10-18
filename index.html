@@ -97,7 +97,7 @@
                             actDiv.innerText = `[LUMA] AÃ§Ã£o concluÃ­da. Sucesso: True`;
                             if (data.preview_html) {
                                 document.getElementById('preview-text').style.display = 'none';
-                                document.getElementById('ui-preview').innerHTML = data.preview_html;
+                                document.getElementById('ui-preview').innerHTML = <iframe srcdoc="" style="width:100%; height:100%; border:none;" sandbox="allow-scripts"></iframe>;
                             }
                         } else {
                             actDiv.style.borderLeftColor = '#f88';
