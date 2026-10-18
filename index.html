@@ -2,7 +2,7 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>Chrono-Vision Dashboard (Cloud)</title>
+    <title>Chrono-Vision Dashboard (v12.3)</title>
     <style>
         body { background-color: #1e1e2a; color: #fff; font-family: Arial, sans-serif; padding: 20px; margin: 0; display: flex; flex-direction: column; height: 100vh; box-sizing: border-box; }
         h1 { color: #8f8; text-align: center; margin-top: 0; }
@@ -27,16 +27,15 @@
 </head>
 <body>
     <h1>Chrono-Vision Dashboard</h1>
-    <div id="status">A ligar à Nuvem...</div>
+    <div id="status">A ligar à Nuvem (Round E)...</div>
     <div class="container" id="metrics"></div>
-
     <div class="main-area">
         <div id="chat-container">
             <div id="chat-box">
-                <div class="message msg-luma">Olá, Fundador. O sistema v12.2 está online. A latência agora é um baseline honesto, e o preview está blindado contra XSS.</div>
+                <div class="message msg-luma">Sistema v12.3 (Round E) ativo. O CISO agora tem anti-iframe, anti-RCE e a metrologia PF-15.</div>
             </div>
             <div id="chat-input-area">
-                <input type="text" id="chat-input" placeholder="Ex: Qual é o TCO? ou Criar botão..." autocomplete="off">
+                <input type="text" id="chat-input" placeholder="Teste os ataques da Bancada..." autocomplete="off">
                 <button id="send-btn">Enviar</button>
             </div>
         </div>
@@ -58,13 +57,13 @@
                     <div class="card">
                         <h3>Latência do Córtex</h3>
                         <p>${data.cortex_latency_ms} ms</p>
-                        <small>${data.latency_mode || 'BASELINE'}</small>
+                        <small>${data.latency_mode}</small>
                     </div>
                     <div class="card"><h3>TCO (3 Anos)</h3><p>US$ ${data.tco_3y_usd}</p></div>
                     <div class="card"><h3>Consumo DVS</h3><p>${data.dvs_power_watts} W</p></div>
                 `;
             } catch (e) {
-                document.getElementById('status').innerText = 'A acordar o servidor na nuvem...';
+                document.getElementById('status').innerText = 'A acordar o servidor...';
             }
         }
         fetchMetrics();
@@ -101,7 +100,7 @@
                             actDiv.style.borderLeftColor = '#f88';
                             actDiv.innerText = `[CISO BLOQUEOU] ${data.resultado}`;
                             document.getElementById('preview-text').style.display = 'block';
-                            document.getElementById('preview-text').innerText = "Preview Bloqueado";
+                            document.getElementById('preview-text').innerText = "Preview Bloqueado (Round E)";
                             document.getElementById('preview-text').style.color = "#f88";
                             document.getElementById('ui-preview').innerHTML = "";
                         }
@@ -127,7 +126,7 @@
 
             loadingDiv = document.createElement('div');
             loadingDiv.className = 'message msg-luma';
-            loadingDiv.innerText = `[LUMA] A processar na nuvem...`;
+            loadingDiv.innerText = `[LUMA] A processar...`;
             chatBox.appendChild(loadingDiv);
             chatBox.scrollTop = chatBox.scrollHeight;
 
@@ -137,16 +136,10 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ command: msg })
                 });
-                
                 if (pollingInterval) clearInterval(pollingInterval);
-                pollingInterval = setInterval(checkStatus, 2000); // Polling mais rápido
-
+                pollingInterval = setInterval(checkStatus, 2000);
             } catch (e) {
                 chatBox.removeChild(loadingDiv);
-                const errDiv = document.createElement('div');
-                errDiv.className = 'message msg-luma';
-                errDiv.innerText = `[ERRO] Falha de comunicação com a nuvem.`;
-                chatBox.appendChild(errDiv);
             }
         }
 
